@@ -7,5 +7,14 @@ def snapp_sms(phone: str):
                              data=json.dumps(
                                  {"cellphone": phone}),
                              headers={"Content-Type": "application/json"})
-
-    print("Snapp_Done")
+    try:
+        status_sms = resp_sms.json()["status"]
+        if status_sms == "OK":
+            print("Snapp_Done")
+            return True
+        else:
+            print("Snapp_Failed")
+            return False
+    except Exception as e:
+        print("Snapp_Failed")
+        return False
