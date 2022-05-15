@@ -12,7 +12,10 @@ def digikala_sms(phone: str):
         status_sms = resp_sms.json()["status"]
         if status_sms == 200:
             print("Digi_kala_Done")
+            return True
         else:
             print("Digi_kala_Failed")
+            return False
     except Exception as e:
         print("Digi_kala_Failed")
+        return False

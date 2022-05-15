@@ -18,3 +18,4 @@ def sheypoor_sms(phone: str):
             return False
     except Exception as e:
         print("Sheypoor_Failed")
+        return False

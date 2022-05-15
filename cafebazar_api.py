@@ -14,7 +14,10 @@ def cafebazar_sms(phone: str):
         status_sms = resp_sms.json()["properties"]["statusCode"]
         if status_sms == 200:
             print("Caffe_bazar_Done")
+            return True
         else:
             print("Caffe_bazar_Failed")
+            return False
     except Exception as e:
         print("Caffe_bazar_Failed")
+        return False

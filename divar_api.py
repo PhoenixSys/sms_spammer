@@ -10,10 +10,10 @@ def divar_sms(phone: str):
         status_sms = resp_sms.json()['authenticate_response']
         if status_sms == 'AUTHENTICATION_VERIFICATION_CODE_SENT':
             print("Divar_Done")
+            return True
         else:
             print("Divar_Failed")
+            return False
     except Exception as e:
         print("Divar_Failed")
-
-
-divar_sms("9142520208")
+        return False
