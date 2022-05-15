@@ -10,4 +10,14 @@ def cafebazar_sms(phone: str):
                                                  "clientVersion": "web"},
                                   "singleRequest": {"getOtpTokenRequest": {"username": phone}}}),
                              headers={"Content-Type": "application/json"})
-    print("Caffe_bazar_Done")
+    try:
+        status_sms = resp_sms.json()["properties"]["statusCode"]
+        if status_sms == 200:
+            print("Caffe_bazar_Done")
+        else:
+            print("Caffe_bazar_Error")
+    except Exception as e:
+        print("Caffe_bazar_Error")
+
+
+cafebazar_sms("9142520208")
