@@ -8,5 +8,11 @@ def poonisha_sms(phone: str):
                                  {"mobile": phone, "type": "1"}),
                              headers={"Content-Type": "application/json",
                                       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"})
+    resp_call = requests.post("https://ponisha.ir/send-mobile-verfication",
+                              data=json.dumps(
+                                  {"mobile": phone, "type": "2"}),
+                              headers={"Content-Type": "application/json",
+                                       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"})
+
     print("Poonisha_SMS_Done")
     print("Poonisha_CALL_Done")
