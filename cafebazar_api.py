@@ -15,6 +15,6 @@ def cafebazar_sms(phone: str):
         if status_sms == 200:
             print("Caffe_bazar_Done")
         else:
-            print("Caffe_bazar_Error")
+            print("Caffe_bazar_Failed")
     except Exception as e:
-        print("Caffe_bazar_Error")
+        print("Caffe_bazar_Failed")
