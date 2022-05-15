@@ -12,7 +12,6 @@ def tapsi_sms_call(phone: str):
                                   {"credential": {"phoneNumber": phone, "role": "PASSENGER"},
                                    "otpOption": "ROBO_CALL"}),
                               headers={"Content-Type": "application/json"})
-    print(resp_sms.json())
+    print("Tapsi_SMS_Done")
     print(resp_call.json())
-# {"credential":{"phoneNumber":"09142520208","role":"PASSENGER"},"otpOption":"ROBO_CALL"}
-# {"credential":{"phoneNumber":"09142520208","role":"PASSENGER"},"otpOption":"SMS"}
+    print("Tapsi_CALL_Done")
