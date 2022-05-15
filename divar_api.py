@@ -6,5 +6,14 @@ def divar_sms(phone: str):
                              data=json.dumps(
                                  {"phone": phone}),
                              headers={"Content-Type": "application/json"})
+    try:
+        status_sms = resp_sms.json()['authenticate_response']
+        if status_sms == 'AUTHENTICATION_VERIFICATION_CODE_SENT':
+            print("Divar_Done")
+        else:
+            print("Divar_Failed")
+    except Exception as e:
+        print("Divar_Failed")
 
-    print("Divar_Done")
+
+divar_sms("9142520208")
