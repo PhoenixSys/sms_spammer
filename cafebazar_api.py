@@ -18,6 +18,3 @@ def cafebazar_sms(phone: str):
             print("Caffe_bazar_Error")
     except Exception as e:
         print("Caffe_bazar_Error")
-
-
-cafebazar_sms("9142520208")
