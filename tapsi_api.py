@@ -12,6 +12,17 @@ def tapsi_sms_call(phone: str):
                                   {"credential": {"phoneNumber": phone, "role": "PASSENGER"},
                                    "otpOption": "ROBO_CALL"}),
                               headers={"Content-Type": "application/json"})
-    print("Tapsi_SMS_Done")
-    print(resp_call.json())
-    print("Tapsi_CALL_Done")
+    try:
+        status_sms = resp_sms.json()["result"]
+        status_call = resp_call.json()["result"]
+        if status_sms == "OK":
+            print("Tapsi_SMS_Done")
+        else:
+            print("Tapsi_SMS_Failed")
+        if status_call == "OK":
+            print("Tapsi_Call_Done")
+        else:
+            print("Tapsi_Call_Failed")
+    except Exception as e:
+        print("Tapsi_SMS_Failed")
+        print("Tapsi_Call_Failed")
