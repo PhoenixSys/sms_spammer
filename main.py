@@ -5,6 +5,7 @@ from sheypoor_api import sheypoor_sms
 from snapp_api import snapp_sms
 from tapsi_api import tapsi_sms_call
 from poonisha_api import poonisha_sms
+from taghcheh_api import taghcheh_sms
 
 phone = input("Enter target phone number: (example : 9XXXXXXXXXXX) ")
 
@@ -16,3 +17,4 @@ while True:
     snapp_sms(phone)
     tapsi_sms_call(phone)
     poonisha_sms(phone)
+    taghcheh_sms(phone)
