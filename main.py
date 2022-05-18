@@ -10,9 +10,10 @@ from tapsi_api import tapsi_sms_call
 from poonisha_api import poonisha_sms
 from taghcheh_api import taghcheh_sms
 
-phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
-schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
-end_schedule_time = input("Enter end schedule time (example : 2022-02-02 13:05:30) : ")
+
+# phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
+# schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
+# end_schedule_time = input("Enter end schedule time (example : 2022-02-02 13:05:30) : ")
 
 
 def spammer(phone, schedule, end_schedule):
