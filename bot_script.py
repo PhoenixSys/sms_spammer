@@ -46,9 +46,9 @@ def start_handler(message):
                 bot.send_message(message.chat.id, "Done !")
             else:
                 phone_number = msg_content[0]
-                start_date = str(datetime.strptime("{}".format(datetime.now()), "%Y-%m-%d %H:%M:%S"))
+                start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
                 end_date = str(
-                    datetime.strptime("{}".format(datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
+                    datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
                 spammer(phone_number, start_date, end_date)
                 bot.send_message(message.chat.id, "Done !")
         else:
