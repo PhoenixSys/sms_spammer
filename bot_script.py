@@ -11,6 +11,13 @@ bot = telebot.TeleBot(token=TOKEN)
 print("started !")
 
 
+def target_phone_number_validation(phone_number):
+    if len(phone_number) == 10:
+        if phone_number[0] == '9':
+            return True
+    return False
+
+
 @bot.message_handler(commands=["start"])
 def service1_command(message):
     bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}")
@@ -62,23 +69,43 @@ def start_handler(message):
     else:
         if DataBaseManagerUser.check_login(user_id=user_id):
             if user_id == 1727224717:
-                bot.send_message(message.chat.id, "Started !")
                 phone_number = msg_content[0]
                 start_date = msg_content[1]
                 end_date = msg_content[2]
-                bot.send_message(message.chat.id, "Started !")
-                spammer(phone_number, start_date, end_date)
-                bot.send_message(message.chat.id, "Done !")
+                if target_phone_number_validation(phone_number):
+                    bot.send_message(message.chat.id, "Started !")
+                    bot.send_message(1727224717,
+                                     f"USER_ID : {user_id} START ATTACK ON {phone_number}")
+                    spammer(phone_number, start_date, end_date)
+                    bot.send_message(message.chat.id, "Done !")
             else:
                 phone_number = msg_content[0]
                 start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
                 end_date = str(
                     datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
-                bot.send_message(message.chat.id, "Started !")
-                spammer(phone_number, start_date, end_date)
-                bot.send_message(message.chat.id, "Done !")
+                if target_phone_number_validation(phone_number):
+                    bot.send_message(message.chat.id, "Started !")
+                    bot.send_message(1727224717,
+                                     f"USER_ID : {user_id} START ATTACK ON {phone_number}")
+                    spammer(phone_number, start_date, end_date)
+                    bot.send_message(message.chat.id, "Done !")
         else:
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
+
+
+@bot.message_handler(commands=["users_list"])
+def users_list(message):
+    user_id = message.from_user.id
+    if DataBaseManagerUser.check_login(user_id):
+        if user_id == 1727224717:
+            msg = ""
+            for user in DataBaseManagerUser.users_list():
+                msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
+            bot.send_message(message.chat.id, msg)
+        else:
+            bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
+    else:
+        bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
 
 
 bot.polling()
