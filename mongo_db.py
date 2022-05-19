@@ -38,15 +38,21 @@ class DataBaseManagerUser:
 
     @classmethod
     def activator(cls, user_id):
-        data = sms_spammer_db.find_one({"user_id": user_id})
-        sms_spammer_db.update_one({"_id": data["_id"]}, {"$set": {"status": True}})
-        return True
+        try:
+            data = sms_spammer_db.find_one({"user_id": user_id})
+            sms_spammer_db.update_one({"_id": data["_id"]}, {"$set": {"status": True}})
+            return True
+        except:
+            return False
 
     @classmethod
     def deactivator(cls, user_id):
-        data = sms_spammer_db.find_one({"user_id": user_id})
-        sms_spammer_db.update_one({"_id": data["_id"]}, {"$set": {"status": False}})
-        return True
+        try:
+            data = sms_spammer_db.find_one({"user_id": user_id})
+            sms_spammer_db.update_one({"_id": data["_id"]}, {"$set": {"status": False}})
+            return True
+        except:
+            return False
 
     @classmethod
     def users_list(cls):
