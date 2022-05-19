@@ -54,14 +54,11 @@ def contact(message):
 @bot.message_handler(commands=["users_list"])
 def users_list(message):
     user_id = message.from_user.id
-    if DataBaseManagerUser.check_login(user_id):
-        if user_id == 1727224717:
-            msg = ""
-            for user in DataBaseManagerUser.users_list():
-                msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
-            bot.send_message(message.chat.id, msg)
-        else:
-            bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
+    if user_id == 1727224717:
+        msg = ""
+        for user in DataBaseManagerUser.users_list():
+            msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
+        bot.send_message(message.chat.id, msg)
     else:
         bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
 
