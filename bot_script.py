@@ -70,15 +70,15 @@ def start_handler(message):
     if msg_content[0] == "/admin":
         if user_id == 1727224717:
             command = msg_content[1]
-            user_info = msg_content[2]
+            user_info = int(msg_content[2])
             if command == "add":
                 bot.send_message(message.chat.id, f"{user_info}")
-                if DataBaseManagerUser.activator(user_id=f"{user_info}"):
+                if DataBaseManagerUser.activator(user_id=user_info):
                     bot.send_message(message.chat.id, f"{user_info} Activated")
                 else:
                     bot.send_message(message.chat.id, f"{user_info} Failed")
             elif command == "remove":
-                if DataBaseManagerUser.deactivator(user_id=f"{user_info}"):
+                if DataBaseManagerUser.deactivator(user_id=user_info):
                     bot.send_message(message.chat.id, f"{user_info} Deactivated")
                 else:
                     bot.send_message(message.chat.id, f"{user_info} Failed")
