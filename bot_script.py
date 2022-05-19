@@ -72,8 +72,11 @@ def start_handler(message):
             command = msg_content[1]
             user_info = msg_content[2]
             if command == "add":
-                DataBaseManagerUser.activator(user_id=user_info)
-                bot.send_message(message.chat.id, "ADD Done !")
+                bot.send_message(message.chat.id, f"{user_info}")
+                if DataBaseManagerUser.activator(user_id=user_info):
+                    bot.send_message(message.chat.id, f"{user_info} Activated")
+                else:
+                    bot.send_message(message.chat.id, f"{user_info} Failed")
             elif command == "remove":
                 DataBaseManagerUser.deactivator(user_id=user_info)
                 bot.send_message(message.chat.id, "REMOVE Done !")

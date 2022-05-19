@@ -48,8 +48,6 @@ class DataBaseManagerUser:
         sms_spammer_db.update_one({"_id": data["_id"]}, {"$set": {"status": False}})
         return True
 
-
-
     @classmethod
     def users_list(cls):
         users_list = []
