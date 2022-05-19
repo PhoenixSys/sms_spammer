@@ -51,6 +51,21 @@ def contact(message):
             bot.send_message(message.chat.id, 'Failed ! Please Send Your Own Number !')
 
 
+@bot.message_handler(commands=["users_list"])
+def users_list(message):
+    user_id = message.from_user.id
+    if DataBaseManagerUser.check_login(user_id):
+        if user_id == 1727224717:
+            msg = ""
+            for user in DataBaseManagerUser.users_list():
+                msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
+            bot.send_message(message.chat.id, msg)
+        else:
+            bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
+    else:
+        bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
+
+
 @bot.message_handler()
 def start_handler(message):
     user_id = message.from_user.id
@@ -61,9 +76,10 @@ def start_handler(message):
             user_info = msg_content[2]
             if command == "add":
                 DataBaseManagerUser.activator(user_id=user_info)
+                bot.send_message(message.chat.id, "ADD Done !")
             elif command == "remove":
                 DataBaseManagerUser.deactivator(user_id=user_info)
-            bot.send_message(message.chat.id, "Done !")
+                bot.send_message(message.chat.id, "REMOVE Done !")
         else:
             bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
     else:
@@ -91,21 +107,6 @@ def start_handler(message):
                     bot.send_message(message.chat.id, "Done !")
         else:
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
-
-
-@bot.message_handler(commands=["users_list"])
-def users_list(message):
-    user_id = message.from_user.id
-    if DataBaseManagerUser.check_login(user_id):
-        if user_id == 1727224717:
-            msg = ""
-            for user in DataBaseManagerUser.users_list():
-                msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
-            bot.send_message(message.chat.id, msg)
-        else:
-            bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
-    else:
-        bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
 
 
 bot.polling()
