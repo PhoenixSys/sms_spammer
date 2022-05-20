@@ -20,14 +20,20 @@ def target_phone_number_validation(phone_number):
 
 @bot.message_handler(commands=["start"])
 def service1_command(message):
-    bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}")
+    if message.chat.id == 1727224717:
+        bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}")
+    else:
+        bot.send_message(message.chat.id, f"Hello Dear Admin")
 
 
 @bot.message_handler(commands=["help"])
 def help_func(message):
     bot.send_message(message.chat.id,
-                     f"Welcome To Spammer Bot!\nIf You Want Use This Bot Please Send Message To @Eric_dev")
-    bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n2022-02-02 13:00:00\n2022-02-02 13:05:30")
+                     f"Welcome To Spammer Bot!\nIf You Want To Use This Bot ---> /register .")
+    if message.chat.id == 1727224717:
+        bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n2022-02-02 13:00:00\n2022-02-02 13:05:30")
+    else:
+        bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX")
 
 
 @bot.message_handler(commands=["register"])
@@ -75,13 +81,14 @@ def start_handler(message):
             command = msg_content[1]
             user_info = int(msg_content[2])
             if command == "add":
-                bot.send_message(message.chat.id, f"{user_info}")
                 if DataBaseManagerUser.activator(user_id=user_info):
+                    bot.send_message(user_info, f"YOU CAN USE THIS BOT NOW !")
                     bot.send_message(message.chat.id, f"{user_info} Activated")
                 else:
                     bot.send_message(message.chat.id, f"{user_info} Failed")
             elif command == "remove":
                 if DataBaseManagerUser.deactivator(user_id=user_info):
+                    bot.send_message(user_info, f"YOU CAN NOT USE THIS BOT NOW !")
                     bot.send_message(message.chat.id, f"{user_info} Deactivated")
                 else:
                     bot.send_message(message.chat.id, f"{user_info} Failed")
@@ -96,9 +103,11 @@ def start_handler(message):
                 if target_phone_number_validation(phone_number):
                     bot.send_message(message.chat.id, "Started !")
                     bot.send_message(1727224717,
-                                     f"USER_ID : {user_id} START ATTACK ON {phone_number}")
+                                     f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
                     spammer(phone_number, start_date, end_date)
                     bot.send_message(message.chat.id, "Done !")
+                else:
+                    bot.send_message(message.chat.id, "Phone Number Is Wrong !")
             else:
                 phone_number = msg_content[0]
                 start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
@@ -107,9 +116,11 @@ def start_handler(message):
                 if target_phone_number_validation(phone_number):
                     bot.send_message(message.chat.id, "Started !")
                     bot.send_message(1727224717,
-                                     f"USER_ID : {user_id} START ATTACK ON {phone_number}")
+                                     f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
                     spammer(phone_number, start_date, end_date)
                     bot.send_message(message.chat.id, "Done !")
+                else:
+                    bot.send_message(message.chat.id, "Phone Number Is Wrong !")
         else:
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
 
