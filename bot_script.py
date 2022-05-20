@@ -51,6 +51,8 @@ def contact(message):
         if message.from_user.id == message.contact.user_id:
             if DataBaseManagerUser.insert_user_data(user_id=message.from_user.id, phone=message.contact.phone_number):
                 bot.send_message(message.chat.id, f'Successful | {message.contact.phone_number} Registered')
+                bot.send_message(1727224717,
+                                 f'Phone : {message.contact.phone_number} \nId : {message.chat.id} \nRegistered')
             else:
                 bot.send_message(message.chat.id, f'You Are Already Registered')
         else:
