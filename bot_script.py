@@ -21,9 +21,9 @@ def target_phone_number_validation(phone_number):
 @bot.message_handler(commands=["start"])
 def service1_command(message):
     if message.chat.id == 1727224717:
-        bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}")
-    else:
         bot.send_message(message.chat.id, f"Hello Dear Admin")
+    else:
+        bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}")
 
 
 @bot.message_handler(commands=["help"])
