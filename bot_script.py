@@ -31,7 +31,7 @@ def help_func(message):
     bot.send_message(message.chat.id,
                      f"Welcome To Spammer Bot!\nIf You Want To Use This Bot ---> /register .")
     if message.chat.id == 1727224717:
-        bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n2022-02-02 13:00:00\n2022-02-02 13:05:30")
+        bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n1")
     else:
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX")
 
