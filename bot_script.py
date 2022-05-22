@@ -97,6 +97,10 @@ def start_handler(message):
             elif command == "remove_all":
                 for user in DataBaseManagerUser.users_list():
                     DataBaseManagerUser.deactivator(int(user['user_id']))
+            elif command == "push_notification":
+                for user in DataBaseManagerUser.users_list():
+                    bot.send_message(int(user['user_id']), msg_content[2])
+                bot.send_message(message.chat.id, f"Notifications Sent")
             else:
                 bot.send_message(message.chat.id, 'Wrong Command !')
         else:
