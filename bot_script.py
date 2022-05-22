@@ -81,25 +81,27 @@ def start_handler(message):
     if msg_content[0] == "/admin":
         if user_id == 1727224717:
             command = msg_content[1]
-            user_info = int(msg_content[2])
+            content = msg_content[2]
             if command == "add":
-                if DataBaseManagerUser.activator(user_id=user_info):
-                    bot.send_message(user_info, f"YOU CAN USE THIS BOT NOW !")
-                    bot.send_message(message.chat.id, f"{user_info} Activated")
+                if DataBaseManagerUser.activator(user_id=int(content)):
+                    bot.send_message(int(content), f"YOU CAN USE THIS BOT NOW !")
+                    bot.send_message(message.chat.id, f"{int(content)} Activated")
                 else:
-                    bot.send_message(message.chat.id, f"{user_info} Failed")
+                    bot.send_message(message.chat.id, f"{int(content)} Failed")
             elif command == "remove":
-                if DataBaseManagerUser.deactivator(user_id=user_info):
-                    bot.send_message(user_info, f"YOU CAN NOT USE THIS BOT NOW !")
-                    bot.send_message(message.chat.id, f"{user_info} Deactivated")
+                if DataBaseManagerUser.deactivator(user_id=int(content)):
+                    bot.send_message(int(content), f"YOU CAN NOT USE THIS BOT NOW !")
+                    bot.send_message(message.chat.id, f"{int(content)} Deactivated")
                 else:
-                    bot.send_message(message.chat.id, f"{user_info} Failed")
+                    bot.send_message(message.chat.id, f"{int(content)} Failed")
             elif command == "remove_all":
                 for user in DataBaseManagerUser.users_list():
-                    DataBaseManagerUser.deactivator(int(user['user_id']))
+                    if int(user['user_id']) != 1727224717:
+                        DataBaseManagerUser.deactivator(int(user['user_id']))
             elif command == "push_notification":
                 for user in DataBaseManagerUser.users_list():
-                    bot.send_message(int(user['user_id']), msg_content[2])
+                    if int(user['user_id']) != 1727224717:
+                        bot.send_message(int(user['user_id']), content)
                 bot.send_message(message.chat.id, f"Notifications Sent")
             else:
                 bot.send_message(message.chat.id, 'Wrong Command !')
