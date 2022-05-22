@@ -104,7 +104,8 @@ def start_handler(message):
             elif command == "add_all":
                 for user in DataBaseManagerUser.users_list():
                     DataBaseManagerUser.activator(user_id=int(user['user_id']))
-                    bot.send_message(int(user['user_id']), f"YOU CAN USE THIS BOT NOW !")
+                    if int(user['user_id']) != 1727224717:
+                        bot.send_message(int(user['user_id']), f"YOU CAN USE THIS BOT NOW !")
                 bot.send_message(message.chat.id, f"All Users Activated !")
             elif command == "push_notification":
                 content = msg_content[2]
