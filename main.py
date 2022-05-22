@@ -9,6 +9,7 @@ from snapp_api import snapp_sms
 from tapsi_api import tapsi_sms_call
 from poonisha_api import poonisha_sms
 from taghcheh_api import taghcheh_sms
+from banikar_api import banikar_sms
 
 
 # phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
@@ -41,5 +42,6 @@ def spammer(phone, schedule, end_schedule):
         tapsi_sms_call(phone)
         poonisha_sms(phone)
         taghcheh_sms(phone)
+        banikar_sms(phone)
 
 # spammer(phone_number, schedule_time, end_schedule_time)
