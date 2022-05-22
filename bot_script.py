@@ -97,7 +97,8 @@ def start_handler(message):
             elif command == "remove_all":
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != 1727224717:
-                        DataBaseManagerUser.deactivator(int(user['user_id']))
+                        DataBaseManagerUser.deactivator(user_id=int(user['user_id']))
+                bot.send_message(message.chat.id, f"All Users Deactivated !")
             elif command == "push_notification":
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != 1727224717:
