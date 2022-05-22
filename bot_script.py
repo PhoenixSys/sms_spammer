@@ -94,6 +94,11 @@ def start_handler(message):
                     bot.send_message(message.chat.id, f"{user_info} Deactivated")
                 else:
                     bot.send_message(message.chat.id, f"{user_info} Failed")
+            elif command == "remove_all":
+                for user in DataBaseManagerUser.users_list():
+                    DataBaseManagerUser.deactivator(int(user['user_id']))
+            else:
+                bot.send_message(message.chat.id, 'Wrong Command !')
         else:
             bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
     else:
@@ -129,6 +134,7 @@ def start_handler(message):
                 else:
                     DataBaseManagerUser.deactivator(user_id=int(user_id))
                     bot.send_message(message.chat.id, "No No Noooo :)")
+                    bot.send_message(message.chat.id, f"YOU CAN NOT USE THIS BOT NOW !")
         else:
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
 
