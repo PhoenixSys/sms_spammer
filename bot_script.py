@@ -81,14 +81,15 @@ def start_handler(message):
     if msg_content[0] == "/admin":
         if user_id == 1727224717:
             command = msg_content[1]
-            content = msg_content[2]
             if command == "add":
+                content = msg_content[2]
                 if DataBaseManagerUser.activator(user_id=int(content)):
                     bot.send_message(int(content), f"YOU CAN USE THIS BOT NOW !")
                     bot.send_message(message.chat.id, f"{int(content)} Activated")
                 else:
                     bot.send_message(message.chat.id, f"{int(content)} Failed")
             elif command == "remove":
+                content = msg_content[2]
                 if DataBaseManagerUser.deactivator(user_id=int(content)):
                     bot.send_message(int(content), f"YOU CAN NOT USE THIS BOT NOW !")
                     bot.send_message(message.chat.id, f"{int(content)} Deactivated")
@@ -100,6 +101,7 @@ def start_handler(message):
                         DataBaseManagerUser.deactivator(user_id=int(user['user_id']))
                 bot.send_message(message.chat.id, f"All Users Deactivated !")
             elif command == "push_notification":
+                content = msg_content[2]
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != 1727224717:
                         bot.send_message(int(user['user_id']), content)
