@@ -80,7 +80,7 @@ def start_handler(message):
     msg_content = message.text.split("\n")
     if msg_content[0] == "/admin":
         if user_id == 1727224717:
-            command = msg_content[1]
+            command = msg_content[1].lower()
             if command == "add":
                 content = msg_content[2]
                 if DataBaseManagerUser.activator(user_id=int(content)):
@@ -98,14 +98,20 @@ def start_handler(message):
             elif command == "remove_all":
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != 1727224717:
-                        DataBaseManagerUser.deactivator(user_id=int(user['user_id']))
-                        bot.send_message(int(user['user_id']), f"YOU CAN NOT USE THIS BOT NOW !")
+                        try:
+                            DataBaseManagerUser.deactivator(user_id=int(user['user_id']))
+                            bot.send_message(int(user['user_id']), f"YOU CAN NOT USE THIS BOT NOW !")
+                        except Exception as e:
+                            bot.send_message(message.chat.id, f"Error : {e} !")
                 bot.send_message(message.chat.id, f"All Users Deactivated !")
             elif command == "add_all":
                 for user in DataBaseManagerUser.users_list():
-                    DataBaseManagerUser.activator(user_id=int(user['user_id']))
                     if int(user['user_id']) != 1727224717:
-                        bot.send_message(int(user['user_id']), f"YOU CAN USE THIS BOT NOW !")
+                        try:
+                            DataBaseManagerUser.activator(user_id=int(user['user_id']))
+                            bot.send_message(int(user['user_id']), f"YOU CAN USE THIS BOT NOW !")
+                        except Exception as e:
+                            bot.send_message(message.chat.id, f"Error : {e} !")
                 bot.send_message(message.chat.id, f"All Users Activated !")
             elif command == "push_notification":
                 content = msg_content[2]
