@@ -65,8 +65,11 @@ def users_list(message):
     if DataBaseManagerUser.check_login(user_id):
         if user_id == 1727224717:
             msg = ""
+            counter = 0
             for user in DataBaseManagerUser.users_list():
+                counter += 1
                 msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
+            msg += f"Total Users : {counter}"
             bot.send_message(message.chat.id, msg)
         else:
             bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
