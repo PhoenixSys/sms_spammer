@@ -120,7 +120,10 @@ def start_handler(message):
                 content = msg_content[2]
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != 1727224717:
-                        bot.send_message(int(user['user_id']), content)
+                        try:
+                            bot.send_message(int(user['user_id']), content)
+                        except Exception as e:
+                            bot.send_message(message.chat.id, f"Error : {e} !")
                 bot.send_message(message.chat.id, f"Notifications Sent")
             else:
                 bot.send_message(message.chat.id, 'Wrong Command !')
