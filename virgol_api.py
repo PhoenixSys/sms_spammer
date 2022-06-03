@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def virgol_api(phone: str):
+def virgol_sms(phone: str):
     phone = "+98" + phone
     resp_sms = requests.post("https://virgool.io/api/v1.4/auth/verify",
                              data=json.dumps(

@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def namava_api(phone: str):
+def namava_sms(phone: str):
     phone = "+98" + phone
     resp_sms = requests.post("https://www.namava.ir/api/v1.0/accounts/registrations/by-phone/request",
                              data=json.dumps(

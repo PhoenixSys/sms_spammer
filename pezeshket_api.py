@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def pezeshket_api(phone: str):
+def pezeshket_sms(phone: str):
     resp_sms = requests.post("https://api.pezeshket.com/core/v1/auth/requestCode",
                              data=json.dumps(
                                  {"mobileNumber": phone}),

@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def snapp_doctor_api(phone: str):
+def snapp_doctor_sms(phone: str):
     resp_sms = requests.get(
         f"https://core.snapp.doctor/Api/Common/v1/sendVerificationCode/{phone}/sms?cCode=+98",
         headers={"Content-Type": "application/json",

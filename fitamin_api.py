@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def fitamin_api(phone: str):
+def fitamin_sms(phone: str):
     phone = "98" + phone
     resp_sms = requests.get(
         f"https://behandam.kermany.com/fitamin-central-service/api/fitamin/v2/register/status?mobile={phone}",

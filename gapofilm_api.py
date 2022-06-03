@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def gapofilm_api(phone: str):
+def gapofilm_sms(phone: str):
     resp_sms = requests.post(
         "https://core.gapfilm.ir/api/v3.1/Account/Login",
         data=json.dumps(

@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def talent_coach_api(phone: str):
+def talent_coach_sms(phone: str):
     phone = "+98" + phone
     resp_sms = requests.post("https://rest.talentcoach.ir/api/v1/service/trainees/",
                              data=json.dumps(

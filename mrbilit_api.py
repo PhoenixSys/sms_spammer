@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def mrbilit_api(phone: str):
+def mrbilit_sms(phone: str):
     phone = "0" + phone
     resp_sms = requests.get(
         f"https://auth.mrbilit.com/api/login/exists/v2?mobileOrEmail={phone}&source=2&sendTokenIfNot=true",

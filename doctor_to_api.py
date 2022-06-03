@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def doctor_to_api(phone: str):
+def doctor_to_sms(phone: str):
     resp_sms = requests.post("https://api.doctoreto.com/api/web/patient/v1/accounts/register",
                              data=json.dumps(
                                  {"mobile": phone, "country_id": 205}),

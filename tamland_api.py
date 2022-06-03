@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def tamland_api(phone: str):
+def tamland_sms(phone: str):
     phone = "0" + phone
     resp_sms = requests.post("https://api.tamland.ir/api/user/signup",
                              data=json.dumps(

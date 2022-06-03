@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def tikban_api(phone: str):
+def tikban_sms(phone: str):
     phone1 = "0" + phone
     resp_sms = requests.post("https://tikban.com/Account/SendTokenForLogin",
                              data=json.dumps(
