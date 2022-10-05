@@ -22,13 +22,15 @@ from pezeshket_api import pezeshket_sms
 from namava_api import namava_sms
 from mrbilit_api import mrbilit_sms
 
-
-# phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
+phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
 # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
 # end_schedule_time = input("Enter end schedule time (example : 2022-02-02 13:05:30) : ")
 
+start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
+end_date = str(datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
 
-def spammer(phone, schedule, end_schedule):
+
+def spammer(phone=phone_number, schedule=start_date, end_schedule=end_date):
     if schedule.strip() == "":
         schedule = datetime.now()
     schedule_date_time_obj = datetime.strptime("{}".format(schedule), "%Y-%m-%d %H:%M:%S")
@@ -68,4 +70,4 @@ def spammer(phone, schedule, end_schedule):
         mrbilit_sms(phone)
         ##################
 
-# spammer(phone_number, schedule_time, end_schedule_time)
+# spammer(phone_number)
