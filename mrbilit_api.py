@@ -13,5 +13,5 @@ def mrbilit_sms(phone: str):
         print("Mrbilit_Done")
         return True
     except Exception as e:
-        print(f"Mrbilit_Failed, {e}")
+        print(f"Mrbilit_Failed")
         return False

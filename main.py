@@ -21,6 +21,12 @@ from talent_coach_api import talent_coach_sms
 from pezeshket_api import pezeshket_sms
 from namava_api import namava_sms
 from mrbilit_api import mrbilit_sms
+from wisgoon_api import wisgoon_sms
+from pinket_api import pinket_sms
+from snapp_market_api import snapp_market_sms
+from bani_mode_api import bani_mode_sms
+from gap_api import gap
+from ali_baba_api import ali_baba
 
 phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
 # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
@@ -69,5 +75,9 @@ def spammer(phone=phone_number, schedule=start_date, end_schedule=end_date):
         namava_sms(phone)
         mrbilit_sms(phone)
         ##################
-
-# spammer(phone_number)
+        wisgoon_sms(phone)
+        pinket_sms(phone)
+        snapp_market_sms(phone)
+        bani_mode_sms(phone)
+        gap(phone)
+        ali_baba(phone)
