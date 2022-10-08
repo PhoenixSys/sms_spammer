@@ -18,5 +18,5 @@ def talent_coach_sms(phone: str):
             print("Talent_Coach_Failed")
             return False
     except Exception as e:
-        print(f"Talent_Coach_Failed, {e}")
+        print(f"Talent_Coach_Failed")
         return False

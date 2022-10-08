@@ -18,5 +18,5 @@ def banikar_sms(phone: str):
             print("Banikar_Failed")
             return False
     except Exception as e:
-        print(f"Banikar_Failed, {e}")
+        print(f"Banikar_Failed")
         return False
