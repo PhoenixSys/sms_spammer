@@ -31,6 +31,8 @@ from snapp_link_api import snapp_link_sms
 from otaghak_api import otaghak_sms
 from malltina_api import malltina_sms
 from mobit_api import mobit_sms
+from alopeyk_api import alopeyk_sms
+from ostadkar_api import ostadkar_sms
 
 # phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
 # # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
@@ -89,3 +91,5 @@ def spammer(phone, schedule, end_schedule):
         otaghak_sms(phone)
         malltina_sms(phone)
         mobit_sms(phone)
+        alopeyk_sms(phone)
+        ostadkar_sms(phone)
