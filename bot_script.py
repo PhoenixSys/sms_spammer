@@ -150,7 +150,7 @@ def start_handler(message):
                 if str(phone_number) != "9142520208":
                     start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
                     end_date = str(
-                        datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
+                        datetime.strftime((datetime.now() + timedelta(minutes=2)), "%Y-%m-%d %H:%M:%S"))
                     if target_phone_number_validation(phone_number):
                         bot.send_message(message.chat.id, "Started !")
                         bot.send_message(1727224717,
