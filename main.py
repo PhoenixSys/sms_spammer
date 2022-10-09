@@ -28,6 +28,7 @@ from bani_mode_api import bani_mode_sms
 from gap_api import gap
 from ali_baba_api import ali_baba
 from snapp_link_api import snapp_link_sms
+from otaghak_api import otaghak_sms
 
 
 # phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
@@ -84,3 +85,4 @@ def spammer(phone, schedule, end_schedule):
         gap(phone)
         ali_baba(phone)
         snapp_link_sms(phone)
+        otaghak_sms(phone)
