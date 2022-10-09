@@ -29,15 +29,16 @@ from gap_api import gap
 from ali_baba_api import ali_baba
 from snapp_link_api import snapp_link_sms
 
-phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
-# schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
-# end_schedule_time = input("Enter end schedule time (example : 2022-02-02 13:05:30) : ")
 
-start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
-end_date = str(datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
+# phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
+# # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
+# # end_schedule_time = input("Enter end schedule time (example : 2022-02-02 13:05:30) : ")
+#
+# start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
+# end_date = str(datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
+#
 
-
-def spammer(phone=phone_number, schedule=start_date, end_schedule=end_date):
+def spammer(phone, schedule, end_schedule):
     if schedule.strip() == "":
         schedule = datetime.now()
     schedule_date_time_obj = datetime.strptime("{}".format(schedule), "%Y-%m-%d %H:%M:%S")
