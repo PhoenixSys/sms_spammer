@@ -56,8 +56,6 @@ def spammer(phone, schedule, end_schedule):
             print("Waiting for schedule time...")
             print("Current time : {}".format(datetime.now()))
             print("Schedule time : {}".format(schedule_date_time_obj))
-            time.sleep(1)
-
     while end_schedule_date_time_obj > datetime.now():
         threading.Thread(target=cafebazar_sms, args=(phone,)).start()
         threading.Thread(target=digikala_sms, args=(phone,)).start()
