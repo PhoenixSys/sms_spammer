@@ -33,7 +33,7 @@ def help_func(message):
                      f"Welcome To Spammer Bot!\nIf You Want To Use This Bot ---> /register .")
     if message.chat.id == admin_user_id:
         bot.send_message(message.chat.id,
-                         "commands :\nactivate\ndeactivate\nactivate_all\ndeactivate_all\nset_vip\nunset_vip\npush_notification\nusers_list")
+                         "commands :\nactivate\ndeactivate\nactivate_all\ndeactivate_all\nset_vip\nunset_vip\npush_notification\nsearch\nusers_list")
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n1")
     else:
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX")
