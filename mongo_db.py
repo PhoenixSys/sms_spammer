@@ -103,3 +103,11 @@ class DataBaseManagerUser:
             return True
         else:
             return False
+
+    @classmethod
+    def search(cls, user_id):
+        data = sms_spammer_db.find_one({"user_id": user_id})
+        if data is not None:
+            return data
+        else:
+            return False

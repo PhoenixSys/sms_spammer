@@ -128,6 +128,14 @@ def start_handler(message):
                     bot.send_message(message.chat.id, f"{int(content)} Removed From Vip")
                 else:
                     bot.send_message(message.chat.id, f"{int(content)} Failed")
+            elif command == "search":
+                content = msg_content[2]
+                user = DataBaseManagerUser.search_user(user_id=int(content))
+                if data is not False:
+                    msg = f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\nVip : {user['vip']}\nSpam Count : {user['spam_count']}\n\n"
+                    bot.send_message(message.chat.id, f"{int(content)} Found\n{msg}")
+                else:
+                    bot.send_message(message.chat.id, f"{int(content)} Not Found")
             elif command == "push_notification":
                 content = msg_content[2]
                 for user in DataBaseManagerUser.users_list():
