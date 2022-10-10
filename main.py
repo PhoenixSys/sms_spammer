@@ -2,7 +2,6 @@ import time
 import os
 import telebot
 from telebot import types
-from main import spammer
 from datetime import datetime, timedelta
 from mongo_db import DataBaseManagerUser
 import threading
