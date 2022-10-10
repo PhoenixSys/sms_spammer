@@ -36,26 +36,16 @@ from alopeyk_api import alopeyk_sms
 from ostadkar_api import ostadkar_sms
 from achareh_api import acharh_sms
 
+
 # phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
 # # # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
 # # # end_schedule_time = input("Enter end schedule time (example : 2022-02-02 13:05:30) : ")
 # start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
 # end_date = str(datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
 
-def spammer(phone, schedule, end_schedule):
-    if schedule.strip() == "":
-        schedule = datetime.now()
-    schedule_date_time_obj = datetime.strptime("{}".format(schedule), "%Y-%m-%d %H:%M:%S")
+def spammer(phone, end_schedule):
     end_schedule_date_time_obj = datetime.strptime("{}".format(end_schedule), "%Y-%m-%d %H:%M:%S")
-    while True:
-        if datetime.now() > schedule_date_time_obj:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            break
-        else:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print("Waiting for schedule time...")
-            print("Current time : {}".format(datetime.now()))
-            print("Schedule time : {}".format(schedule_date_time_obj))
+    os.system('cls' if os.name == 'nt' else 'clear')
     while end_schedule_date_time_obj > datetime.now():
         threading.Thread(target=cafebazar_sms, args=(phone,)).start()
         threading.Thread(target=digikala_sms, args=(phone,)).start()

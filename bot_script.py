@@ -10,6 +10,8 @@ bot = telebot.TeleBot(token=TOKEN)
 
 print("started !")
 
+admin_user_id = 1727224717
+
 
 def target_phone_number_validation(phone_number):
     if len(phone_number) == 10:
@@ -20,7 +22,7 @@ def target_phone_number_validation(phone_number):
 
 @bot.message_handler(commands=["start"])
 def service1_command(message):
-    if message.chat.id == 1727224717:
+    if message.chat.id == admin_user_id:
         bot.send_message(message.chat.id, f"Hello Dear Admin")
     else:
         bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}")
@@ -30,7 +32,7 @@ def service1_command(message):
 def help_func(message):
     bot.send_message(message.chat.id,
                      f"Welcome To Spammer Bot!\nIf You Want To Use This Bot ---> /register .")
-    if message.chat.id == 1727224717:
+    if message.chat.id == admin_user_id:
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n1")
     else:
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX")
@@ -51,7 +53,7 @@ def contact(message):
         if message.from_user.id == message.contact.user_id:
             if DataBaseManagerUser.insert_user_data(user_id=message.from_user.id, phone=message.contact.phone_number):
                 bot.send_message(message.chat.id, f'Successful | {message.contact.phone_number} Registered')
-                bot.send_message(1727224717,
+                bot.send_message(admin_user_id,
                                  f'Phone : {message.contact.phone_number} \nId : {message.chat.id} \nRegistered')
             else:
                 bot.send_message(message.chat.id, f'You Are Already Registered')
@@ -63,7 +65,7 @@ def contact(message):
 def users_list(message):
     user_id = message.from_user.id
     if DataBaseManagerUser.check_login(user_id):
-        if user_id == 1727224717:
+        if user_id == admin_user_id:
             msg = ""
             counter = 0
             for user in DataBaseManagerUser.users_list():
@@ -82,7 +84,7 @@ def start_handler(message):
     user_id = message.from_user.id
     msg_content = message.text.split("\n")
     if msg_content[0] == "/admin":
-        if user_id == 1727224717:
+        if user_id == admin_user_id:
             command = msg_content[1].lower()
             if command == "add":
                 content = msg_content[2]
@@ -100,7 +102,7 @@ def start_handler(message):
                     bot.send_message(message.chat.id, f"{int(content)} Failed")
             elif command == "remove_all":
                 for user in DataBaseManagerUser.users_list():
-                    if int(user['user_id']) != 1727224717:
+                    if int(user['user_id']) != admin_user_id:
                         try:
                             DataBaseManagerUser.deactivator(user_id=int(user['user_id']))
                             bot.send_message(int(user['user_id']), f"YOU CAN NOT USE THIS BOT NOW !")
@@ -109,7 +111,7 @@ def start_handler(message):
                 bot.send_message(message.chat.id, f"All Users Deactivated !")
             elif command == "add_all":
                 for user in DataBaseManagerUser.users_list():
-                    if int(user['user_id']) != 1727224717:
+                    if int(user['user_id']) != admin_user_id:
                         try:
                             DataBaseManagerUser.activator(user_id=int(user['user_id']))
                             bot.send_message(int(user['user_id']), f"YOU CAN USE THIS BOT NOW !")
@@ -119,7 +121,7 @@ def start_handler(message):
             elif command == "push_notification":
                 content = msg_content[2]
                 for user in DataBaseManagerUser.users_list():
-                    if int(user['user_id']) != 1727224717:
+                    if int(user['user_id']) != admin_user_id:
                         try:
                             bot.send_message(int(user['user_id']), content)
                         except Exception as e:
@@ -131,31 +133,29 @@ def start_handler(message):
             bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
     else:
         if DataBaseManagerUser.check_login(user_id=user_id):
-            if user_id == 1727224717:
+            if user_id == admin_user_id:
                 phone_number = msg_content[0]
                 period = msg_content[1]
-                start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
                 end_date = str(
                     datetime.strftime((datetime.now() + timedelta(minutes=int(period))), "%Y-%m-%d %H:%M:%S"))
                 if target_phone_number_validation(phone_number):
                     bot.send_message(message.chat.id, "Started !")
-                    bot.send_message(1727224717,
+                    bot.send_message(admin_user_id,
                                      f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                    spammer(phone_number, start_date, end_date)
+                    spammer(phone_number, end_date)
                     bot.send_message(message.chat.id, "Done !")
                 else:
                     bot.send_message(message.chat.id, "Phone Number Is Wrong !")
             else:
                 phone_number = msg_content[0]
                 if str(phone_number) != "9142520208":
-                    start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
-                    end_date = str(
+                    end_time = str(
                         datetime.strftime((datetime.now() + timedelta(minutes=2)), "%Y-%m-%d %H:%M:%S"))
                     if target_phone_number_validation(phone_number):
                         bot.send_message(message.chat.id, "Started !")
-                        bot.send_message(1727224717,
+                        bot.send_message(admin_user_id,
                                          f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                        spammer(phone_number, start_date, end_date)
+                        spammer(phone_number, end_time)
                         bot.send_message(message.chat.id, "Done !")
                     else:
                         bot.send_message(message.chat.id, "Phone Number Is Wrong !")
