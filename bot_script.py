@@ -152,12 +152,11 @@ def start_handler(message):
                     datetime.strftime((datetime.now() + timedelta(minutes=int(period))), "%Y-%m-%d %H:%M:%S"))
                 if target_phone_number_validation(phone_number):
                     bot.send_message(message.chat.id, "Started !")
+                    bot.send_message(message.chat.id, f"{DataBaseManagerUser.spam_count(user_id=user_id)}")
                     bot.send_message(admin_user_id,
                                      f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                    # spammer(phone_number, end_date, message.chat.id)
-                    threading.Thread(target=spammer, args=(phone_number, end_time, message.chat.id,)).start()
-                    threading.Thread.join()
-                    DataBaseManagerUser.spam_count_up(user_id=user_id)
+                    if spammer(phone_number, end_date, message.chat.id):
+                        DataBaseManagerUser.spam_count_up(user_id=user_id)
                 else:
                     bot.send_message(message.chat.id, "Phone Number Is Wrong !")
             else:
@@ -169,10 +168,8 @@ def start_handler(message):
                         bot.send_message(message.chat.id, "Started !")
                         bot.send_message(admin_user_id,
                                          f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                        # spammer(phone_number, end_time, message.chat.id)
-                        threading.Thread(target=spammer, args=(phone_number, end_time, message.chat.id,)).start()
-                        threading.Thread.join()
-                        DataBaseManagerUser.spam_count_up(user_id=user_id)
+                        if spammer(phone_number, end_time, message.chat.id):
+                            DataBaseManagerUser.spam_count_up(user_id=user_id)
                     else:
                         bot.send_message(message.chat.id, "Phone Number Is Wrong !")
                 else:
