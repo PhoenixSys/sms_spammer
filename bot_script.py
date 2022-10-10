@@ -155,7 +155,7 @@ def start_handler(message):
                     bot.send_message(message.chat.id, f"{DataBaseManagerUser.spam_count(user_id=user_id)}")
                     bot.send_message(admin_user_id,
                                      f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                    if spammer(phone_number, end_date, message.chat.id):
+                    if spammer(phone_number, end_time, message.chat.id):
                         DataBaseManagerUser.spam_count_up(user_id=user_id)
                 else:
                     bot.send_message(message.chat.id, "Phone Number Is Wrong !")
