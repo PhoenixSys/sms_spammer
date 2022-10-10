@@ -52,7 +52,7 @@ admin_user_id = 1727224717
 # start_date = str(datetime.strftime((datetime.now()), "%Y-%m-%d %H:%M:%S"))
 # end_date = str(datetime.strftime((datetime.now() + timedelta(minutes=1)), "%Y-%m-%d %H:%M:%S"))
 
-def spammer(phone, end_schedule):
+def spammer(phone, end_schedule, chatid):
     try:
         end_schedule_date_time_obj = datetime.strptime("{}".format(end_schedule), "%Y-%m-%d %H:%M:%S")
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -126,5 +126,6 @@ def spammer(phone, end_schedule):
             # alopeyk_sms(phone)
             # ostadkar_sms(phone)
             # acharh_sms(phone)
+        bot.send_message(chatid, "Done !")
     except Exception as e:
-        bot.send_message(chat_id=admin_user_id, text="Error : {}".format(e))
+        bot.send_message(admin_user_id, "Error : {}".format(e))

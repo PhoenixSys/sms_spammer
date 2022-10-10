@@ -148,14 +148,15 @@ def start_handler(message):
             if user_id == admin_user_id:
                 phone_number = msg_content[0]
                 period = msg_content[1]
-                end_date = str(
+                end_time = str(
                     datetime.strftime((datetime.now() + timedelta(minutes=int(period))), "%Y-%m-%d %H:%M:%S"))
                 if target_phone_number_validation(phone_number):
                     bot.send_message(message.chat.id, "Started !")
                     bot.send_message(admin_user_id,
                                      f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                    spammer(phone_number, end_date)
-                    bot.send_message(message.chat.id, "Done !")
+                    # spammer(phone_number, end_date, message.chat.id)
+                    threading.Thread(target=spammer, args=(phone_number, end_time, message.chat.id,)).start()
+                    threading.Thread.join()
                     DataBaseManagerUser.spam_count_up(user_id=user_id)
                 else:
                     bot.send_message(message.chat.id, "Phone Number Is Wrong !")
@@ -168,8 +169,9 @@ def start_handler(message):
                         bot.send_message(message.chat.id, "Started !")
                         bot.send_message(admin_user_id,
                                          f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
-                        spammer(phone_number, end_time)
-                        bot.send_message(message.chat.id, "Done !")
+                        # spammer(phone_number, end_time, message.chat.id)
+                        threading.Thread(target=spammer, args=(phone_number, end_time, message.chat.id,)).start()
+                        threading.Thread.join()
                         DataBaseManagerUser.spam_count_up(user_id=user_id)
                     else:
                         bot.send_message(message.chat.id, "Phone Number Is Wrong !")
@@ -181,4 +183,4 @@ def start_handler(message):
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
 
 
-bot.polling()
+bot.polling(non_stop=True, interval=0)
