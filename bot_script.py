@@ -33,6 +33,8 @@ def help_func(message):
     bot.send_message(message.chat.id,
                      f"Welcome To Spammer Bot!\nIf You Want To Use This Bot ---> /register .")
     if message.chat.id == admin_user_id:
+        bot.send_message(message.chat.id,
+                         "commands :\nactivate\ndeactivate\nactivate_all\ndeactivate_all\nset_vip\nunset_vip\npush_notification\nusers_list")
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX\n1")
     else:
         bot.send_message(message.chat.id, "Example : \n9XXXXXXXXXXX")
@@ -64,19 +66,16 @@ def contact(message):
 @bot.message_handler(commands=["users_list"])
 def users_list(message):
     user_id = message.from_user.id
-    if DataBaseManagerUser.check_login(user_id):
-        if user_id == admin_user_id:
-            msg = ""
-            counter = 0
-            for user in DataBaseManagerUser.users_list():
-                counter += 1
-                msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\n\n"
-            msg += f"Total Users : {counter}"
-            bot.send_message(message.chat.id, msg)
-        else:
-            bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
+    if user_id == admin_user_id:
+        msg = ""
+        counter = 0
+        for user in DataBaseManagerUser.users_list():
+            counter += 1
+            msg += f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\nVip : {user['vip']}\nSpam Count : {user['spam_count']}\n\n"
+        msg += f"Total Users : {counter}"
+        bot.send_message(message.chat.id, msg)
     else:
-        bot.send_message(message.chat.id, 'You Are Not Registered !')
+        bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
 
 
 @bot.message_handler()
@@ -86,21 +85,21 @@ def start_handler(message):
     if msg_content[0] == "/admin":
         if user_id == admin_user_id:
             command = msg_content[1].lower()
-            if command == "add":
+            if command == "activate":
                 content = msg_content[2]
                 if DataBaseManagerUser.activator(user_id=int(content)):
                     bot.send_message(int(content), f"YOU CAN USE THIS BOT NOW !")
                     bot.send_message(message.chat.id, f"{int(content)} Activated")
                 else:
                     bot.send_message(message.chat.id, f"{int(content)} Failed")
-            elif command == "remove":
+            elif command == "deactivate":
                 content = msg_content[2]
                 if DataBaseManagerUser.deactivator(user_id=int(content)):
-                    bot.send_message(int(content), f"YOU CAN NOT USE THIS BOT NOW !")
+                    bot.send_message(int(content), f"SORRY ! YOU CAN NOT USE THIS BOT !")
                     bot.send_message(message.chat.id, f"{int(content)} Deactivated")
                 else:
                     bot.send_message(message.chat.id, f"{int(content)} Failed")
-            elif command == "remove_all":
+            elif command == "deactivate_all":
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != admin_user_id:
                         try:
@@ -109,7 +108,7 @@ def start_handler(message):
                         except Exception as e:
                             bot.send_message(message.chat.id, f"Error : {e} !")
                 bot.send_message(message.chat.id, f"All Users Deactivated !")
-            elif command == "add_all":
+            elif command == "activate_all":
                 for user in DataBaseManagerUser.users_list():
                     if int(user['user_id']) != admin_user_id:
                         try:
@@ -118,6 +117,18 @@ def start_handler(message):
                         except Exception as e:
                             bot.send_message(message.chat.id, f"Error : {e} !")
                 bot.send_message(message.chat.id, f"All Users Activated !")
+            elif command == "set_vip":
+                content = msg_content[2]
+                if DataBaseManagerUser.set_vip(user_id=int(content)):
+                    bot.send_message(message.chat.id, f"{int(content)} Add To Vip")
+                else:
+                    bot.send_message(message.chat.id, f"{int(content)} Failed")
+            elif command == "unset_vip":
+                content = msg_content[2]
+                if DataBaseManagerUser.unset_vip(user_id=int(content)):
+                    bot.send_message(message.chat.id, f"{int(content)} Removed From Vip")
+                else:
+                    bot.send_message(message.chat.id, f"{int(content)} Failed")
             elif command == "push_notification":
                 content = msg_content[2]
                 for user in DataBaseManagerUser.users_list():
@@ -132,7 +143,9 @@ def start_handler(message):
         else:
             bot.send_message(message.chat.id, 'Only Admin Can Use This Command !')
     else:
-        if DataBaseManagerUser.check_login(user_id=user_id):
+        if DataBaseManagerUser.check_login(user_id=user_id) and (
+                DataBaseManagerUser.spam_count(user_id=user_id) <= 3 or DataBaseManagerUser.check_vip(
+            user_id=user_id) == True):
             if user_id == admin_user_id:
                 phone_number = msg_content[0]
                 period = msg_content[1]
