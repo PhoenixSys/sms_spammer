@@ -130,8 +130,8 @@ def start_handler(message):
                     bot.send_message(message.chat.id, f"{int(content)} Failed")
             elif command == "search":
                 content = msg_content[2]
-                user = DataBaseManagerUser.search_user(user_id=int(content))
-                if data is not False:
+                user = DataBaseManagerUser.search(user_id=int(content))
+                if user is not False:
                     msg = f"Phone : {user['phone']}\nUser_id : {user['user_id']}\nStatus : {user['status']}\nVip : {user['vip']}\nSpam Count : {user['spam_count']}\n\n"
                     bot.send_message(message.chat.id, f"{int(content)} Found\n{msg}")
                 else:
@@ -170,7 +170,7 @@ def start_handler(message):
                 phone_number = msg_content[0]
                 if str(phone_number) != "9142520208":
                     end_time = str(
-                        datetime.strftime((datetime.now() + timedelta(minutes=10)), "%Y-%m-%d %H:%M:%S"))
+                        datetime.strftime((datetime.now() + timedelta(minutes=2)), "%Y-%m-%d %H:%M:%S"))
                     if target_phone_number_validation(phone_number):
                         bot.send_message(message.chat.id, "Started !")
                         DataBaseManagerUser.spam_count_up(user_id=user_id)
@@ -181,6 +181,8 @@ def start_handler(message):
                         bot.send_message(message.chat.id, "Phone Number Is Wrong !")
                 else:
                     DataBaseManagerUser.deactivator(user_id=int(user_id))
+                    bot.send_message(admin_user_id,
+                                     f"USER_ID : {user_id} \nSTART ATTACK ON YOU ! AND BANNED !")
                     bot.send_message(message.chat.id, "No No Noooo :)")
                     bot.send_message(message.chat.id, f"SORRY ! YOU CAN NOT USE THIS BOT NOW !")
         else:
