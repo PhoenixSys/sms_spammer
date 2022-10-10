@@ -75,7 +75,7 @@ def spammer(phone, end_schedule, chatid):
             virgol_sms(phone)
             talent_coach_sms(phone)
             pezeshket_sms(phone)
-            namava_sms(phone)
+            # namava_sms(phone)
             mrbilit_sms(phone)
             wisgoon_sms(phone)
             pinket_sms(phone)
