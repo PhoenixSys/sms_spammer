@@ -44,6 +44,8 @@ from achareh_api import acharh_sms
 TOKEN = "5356098699:AAHLIDFeLmFcPsAL3VisFQiYjH_I21Xs4aw"
 bot = telebot.TeleBot(token=TOKEN)
 
+admin_user_id = 1727224717
+
 
 # phone_number = input("Enter target phone number (example : 9XXXXXXXXXXX) : ")
 # # # schedule_time = input("Enter schedule time (example : 2022-02-02 13:00:00) : ")
@@ -126,4 +128,4 @@ def spammer(phone, end_schedule):
             # ostadkar_sms(phone)
             # acharh_sms(phone)
     except Exception as e:
-        bot.send_message(chat_id=chat_id, text="Error : {}".format(e))
+        bot.send_message(chat_id=admin_user_id, text="Error : {}".format(e))
