@@ -18,6 +18,3 @@ def acharh_sms(phone: str):
     except Exception as e:
         print("Achareh_Failed")
         return False
-
-if __name__ == "__main__":
-    acharh_sms('9019640184')

@@ -10,8 +10,7 @@ def alopeyk_sms(phone: str):
                                   "uuid": True, "phone": phone}),
                              headers={"Content-Type": "application/json"})
     try:
-        status_sms = {"status": "success", "message": None,
-                      "object": {"token": "DRBMN6X59NBD49H9BZ5SCLS8B76RDKXMKSRLFH7F5XDDHB1N5RM2DKZM3MLNCXHS"}}
+        status_sms = resp_sms.json()
         if status_sms["status"] == "success":
             print("Alopeyk_Done")
             return True
