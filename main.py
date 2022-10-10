@@ -24,7 +24,6 @@ from tikban_api import tikban_sms
 from virgol_api import virgol_sms
 from talent_coach_api import talent_coach_sms
 from pezeshket_api import pezeshket_sms
-from namava_api import namava_sms
 from mrbilit_api import mrbilit_sms
 from wisgoon_api import wisgoon_sms
 from pinket_api import pinket_sms
