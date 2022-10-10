@@ -53,7 +53,7 @@ class DataBaseManagerUser:
             return False
 
     @classmethod
-    def check_vip(cls , user_id):
+    def check_vip(cls, user_id):
         data = sms_spammer_db.find_one({"user_id": user_id})
         if data is not None:
             if data["vip"] is True:
@@ -62,7 +62,6 @@ class DataBaseManagerUser:
                 return False
         else:
             return False
-
 
     @classmethod
     def set_vip(cls, user_id):
@@ -92,7 +91,15 @@ class DataBaseManagerUser:
     def spam_count(cls, user_id):
         data = sms_spammer_db.find_one({"user_id": user_id})
         if data is not None:
-            sms_spammer_db.update_one({"user_id": user_id}, {"$set": {"spam_count": data["spam_count"] + 1}})
             return data["spam_count"]
+        else:
+            return False
+
+    @classmethod
+    def spam_count_up(cls, user_id):
+        data = sms_spammer_db.find_one({"user_id": user_id})
+        if data is not None:
+            sms_spammer_db.update_one({"user_id": user_id}, {"$set": {"spam_count": data["spam_count"] + 1}})
+            return True
         else:
             return False

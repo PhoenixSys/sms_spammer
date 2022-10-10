@@ -2,7 +2,6 @@ import telebot
 from telebot import types
 from main import spammer
 from datetime import datetime, timedelta
-
 from mongo_db import DataBaseManagerUser
 
 TOKEN = "5356098699:AAHLIDFeLmFcPsAL3VisFQiYjH_I21Xs4aw"
@@ -157,6 +156,7 @@ def start_handler(message):
                                      f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
                     spammer(phone_number, end_date)
                     bot.send_message(message.chat.id, "Done !")
+                    DataBaseManagerUser.spam_count_up(user_id=user_id)
                 else:
                     bot.send_message(message.chat.id, "Phone Number Is Wrong !")
             else:
@@ -170,12 +170,13 @@ def start_handler(message):
                                          f"USER_ID : {user_id} \nSTART ATTACK ON : {phone_number}")
                         spammer(phone_number, end_time)
                         bot.send_message(message.chat.id, "Done !")
+                        DataBaseManagerUser.spam_count_up(user_id=user_id)
                     else:
                         bot.send_message(message.chat.id, "Phone Number Is Wrong !")
                 else:
                     DataBaseManagerUser.deactivator(user_id=int(user_id))
                     bot.send_message(message.chat.id, "No No Noooo :)")
-                    bot.send_message(message.chat.id, f"YOU CAN NOT USE THIS BOT NOW !")
+                    bot.send_message(message.chat.id, f"SORRY ! YOU CAN NOT USE THIS BOT NOW !")
         else:
             bot.send_message(message.chat.id, 'You Are Not Allowed !!')
 
